@@ -25,9 +25,26 @@ public class ProductService {
     }
 
     public Product addProduct(Product product, MultipartFile imageFile) throws IOException {
+        System.out.println("Inside service.addProduct()");
+        product.setImageName(imageFile.getOriginalFilename());
+        product.setImageType(imageFile.getContentType());
+        product.setImageData(imageFile.getBytes());
+        return repo.save(product);
+    }
+
+    // public void updateProduct(Product product, MultipartFile imageFile) throws IOException {
+    //     product.setImageData(imageFile.getBytes());
+    //     product.setImageName(imageFile.getName());
+    //     product.setImageType(imageFile.getContentType());
+    //     repo.save(product);
+    // }
+
+    public Product updateProduct(int id, Product product, MultipartFile imageFile) throws IOException {
         product.setImageName(imageFile.getOriginalFilename());
         product.setImageType(imageFile.getContentType());
         product.setImageData(imageFile.getBytes());
         return repo.save(product);
     }
 }
+
+
